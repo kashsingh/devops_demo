@@ -15,6 +15,7 @@ def browser():
 
     print("Starting headless browser.")
     driver = webdriver.Chrome(options=chrome_options)
+    driver.implicitly_wait(10)
     print("Browser started")
 
     # Return the driver object at the end of setup
@@ -31,6 +32,7 @@ def test_open_url(browser):
 
 # Test step 2 - Check Title
 def test_check_title(browser):
+    browser.get("http://35.154.147.222/")
     assert "Simple PHP Website" in browser.title
 
 
@@ -52,8 +54,6 @@ def test_product_link(browser):
 # Test step 5 - Check Contact Link Present
 def test_contact_link(browser):
     assert browser.find_element_by_id("Contact")
-
-print("All tests cleared")
 
 # Uncomment below line to fail a test
 #assert driver.find_element_by_id("Noe")
