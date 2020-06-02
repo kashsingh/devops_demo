@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-@pytest.fixture
+@pytest.fixture(scope="module", autouse=True)
 def browser():
     # Set below options for AWS optimized headless browser
     chrome_options = Options()
@@ -15,7 +15,7 @@ def browser():
 
     print("Starting headless browser.")
     driver = webdriver.Chrome(options=chrome_options)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(5)
     print("Browser started")
 
     # Return the driver object at the end of setup
@@ -34,7 +34,6 @@ def test_open_url(browser):
 
 # Test step 2 - Check Title
 def test_check_title(browser):
-    browser.get("http://35.154.147.222/")
     assert "Simple PHP Website" in browser.title
 
 
