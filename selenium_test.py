@@ -22,7 +22,9 @@ def browser():
     yield driver
 
     # For cleanup, quit the driver
+    driver.close()
     driver.quit()
+    print("Test Complete")
 
 
 # Test step 1 - Open URL
