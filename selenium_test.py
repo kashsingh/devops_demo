@@ -7,14 +7,14 @@ from selenium.webdriver.chrome.options import Options
 def browser():
     # Set below options for AWS optimized headless browser
     chrome_options = Options()
-    """all_arguments = ["--headless", "window-size=1400,1500", "--disable-gpu",
+    all_arguments = ["--headless", "window-size=1400,1500", "--disable-gpu",
                      "--no-sandbox", "start-maximized", "enable-automation",
                      "--disable-infobars", "--disable-dev-shm-usage"]
     for argument in all_arguments:
-        chrome_options.add_argument(argument)"""
+        chrome_options.add_argument(argument)
 
     print("Starting headless browser.")
-    driver = webdriver.Chrome()#options=chrome_options
+    driver = webdriver.Chrome(options=chrome_options)
     print("Browser started")
 
     # Return the driver object at the end of setup
