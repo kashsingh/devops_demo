@@ -1,33 +1,59 @@
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-# Set below options for AWS headless browser
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("window-size=1400,1500")
-chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("start-maximized")
-chrome_options.add_argument("enable-automation")
-chrome_options.add_argument("--disable-infobars")
-chrome_options.add_argument("--disable-dev-shm-usage")
 
-print("Starting headless browser.")
-driver = webdriver.Chrome(options=chrome_options)
-print("Browser started")
+@pytest.fixture
+def browser():
+    # Set below options for AWS optimized headless browser
+    chrome_options = Options()
+    """all_arguments = ["--headless", "window-size=1400,1500", "--disable-gpu",
+                     "--no-sandbox", "start-maximized", "enable-automation",
+                     "--disable-infobars", "--disable-dev-shm-usage"]
+    for argument in all_arguments:
+        chrome_options.add_argument(argument)"""
 
-print("Fetching URL")
-driver.get("http://35.154.147.222/")
+    print("Starting headless browser.")
+    driver = webdriver.Chrome()#options=chrome_options
+    print("Browser started")
 
-print("Executing tests")
-assert "Simple PHP Website" in driver.title
-assert driver.find_element_by_id("Home")
-assert driver.find_element_by_id("About Us")
-assert driver.find_element_by_id("Products")
-assert driver.find_element_by_id("Contact")
+    # Return the driver object at the end of setup
+    yield driver
+
+    # For cleanup, quit the driver
+    driver.quit()
+
+
+# Test step 1 - Open URL
+def test_open_url(browser):
+    browser.get("http://35.154.147.222/")
+
+
+# Test step 2 - Check Title
+def test_check_title(browser):
+    assert "Simple PHP Website" in browser.title
+
+
+# Test step 2 - Check Home Link Present
+def test_home_link(browser):
+    assert browser.find_element_by_id("Home")
+
+
+# Test step 3 - Check About Us Link Present
+def test_about_link(browser):
+    assert browser.find_element_by_id("About Us")
+
+
+# Test step 4 - Check Product Link Present
+def test_product_link(browser):
+    assert browser.find_element_by_id("Products")
+
+
+# Test step 5 - Check Contact Link Present
+def test_product_link(browser):
+    assert browser.find_element_by_id("Contact")
+
 print("All tests cleared")
 
 # Uncomment below line to fail a test
 #assert driver.find_element_by_id("Noe")
-
-driver.close()
