@@ -30,24 +30,24 @@ def test_open_url(browser):
 
 # Test step 2 - Check Title
 def test_check_title(browser):
-    assert "Simple PHP Websites" in browser.title
+    assert "Simple PHP Website" in browser.title
 
 
 # Test step 2 - Check Home Link Present
 def test_home_link(browser):
-    assert browser.find_element_by_id("Homes")
+    assert browser.find_element_by_id("Home")
 
 
 # Test step 3 - Check About Us Link Present
 def test_about_link(browser):
-    assert browser.find_element_by_id("About Uss")
+    assert browser.find_element_by_id("About Us")
 
 
 # Test step 4 - Check Product Link Present
 def test_product_link(browser):
-    assert browser.find_element_by_id("Productss")
+    assert browser.find_element_by_id("Products")
 
 
 # Test step 5 - Check Contact Link Present
 def test_contact_link(browser):
-    assert browser.find_element_by_id("Contacts")
+    assert browser.find_element_by_id("Contact")
