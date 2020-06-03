@@ -57,3 +57,4 @@ def test_contact_link(browser):
     assert browser.find_element_by_id("Contact")
 
 # Uncomment below line to fail a test
+# Checking poll scm
