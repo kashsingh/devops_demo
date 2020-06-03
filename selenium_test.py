@@ -30,7 +30,7 @@ def test_open_url(browser):
 
 # Test step 2 - Check Title
 def test_check_title(browser):
-    assert "Simple PHP Websites" in browser.title
+    assert "Simple PHP Website" in browser.title
 
 
 # Test step 2 - Check Home Link Present
